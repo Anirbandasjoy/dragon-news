@@ -23,7 +23,7 @@ const Home = () => {
             </div>
 
             <div className='grid grid-cols-1 sm:grid-cols-4 w-full sm:max-w-6xl mx-auto gap-6 '>
-                <div className=' min-h-screen'>
+                <div className='h-screen overflow-auto'>
                     <h1 className='font-bold'>All Category</h1>
                     <button className='btn w-full rounded-sm capitalize font-bold mt-5'>National News</button>
                     <div className='flex flex-col gap-4 ml-10 font-semibold text-gray-500 mt-7 '>
@@ -37,11 +37,11 @@ const Home = () => {
                     </div>
 
                 </div>
-                <div className='col-span-2 text-center'>
+                <div className='col-span-2 text-center h-screen overflow-auto '>
                     <h1 className='mb-5 font-bold text-left'>Dragon News Home</h1>
                     <News />
                 </div>
-                <div className=''>
+                <div className='h-screen overflow-auto'>
                     <RightNavbar />
                 </div>
             </div>
