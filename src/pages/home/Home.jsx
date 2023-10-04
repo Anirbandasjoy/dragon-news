@@ -3,6 +3,8 @@ import Header from '../../components/Header'
 import Marquee from 'react-fast-marquee'
 import Navbar from '../../components/Navbar'
 import CategoryImages from '../../components/CategoryImages'
+import RightNavbar from './RightNavbar'
+import News from '../../components/News'
 
 const Home = () => {
     const { data } = useLoaderData();
@@ -20,8 +22,8 @@ const Home = () => {
                 <Navbar />
             </div>
 
-            <div className='grid grid-cols-1 sm:grid-cols-4 w-full sm:max-w-6xl mx-auto '>
-                <div className='border h-screen'>
+            <div className='grid grid-cols-1 sm:grid-cols-4 w-full sm:max-w-6xl mx-auto gap-6 '>
+                <div className=' min-h-screen'>
                     <h1 className='font-bold'>All Category</h1>
                     <button className='btn w-full rounded-sm capitalize font-bold mt-5'>National News</button>
                     <div className='flex flex-col gap-4 ml-10 font-semibold text-gray-500 mt-7 '>
@@ -35,8 +37,13 @@ const Home = () => {
                     </div>
 
                 </div>
-                <div className='col-span-2 border h-screen'>Dragon new </div>
-                <div className='border h-screen'>logn social media</div>
+                <div className='col-span-2 text-center'>
+                    <h1 className='mb-5 font-bold text-left'>Dragon News Home</h1>
+                    <News />
+                </div>
+                <div className=''>
+                    <RightNavbar />
+                </div>
             </div>
         </div>
     )
