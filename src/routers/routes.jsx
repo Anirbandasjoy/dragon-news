@@ -3,15 +3,17 @@ import axios from "axios";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/home/Home";
 import About from "../pages/about/About";
-import Contact from "../pages/contact/Contact";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import NewsDetails from "../components/NewsDetails";
+import NotFound from "../pages/notFound/NotFound";
 
 
 export const routes = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <NotFound />,
         children: [
             {
                 path: "/",
@@ -23,16 +25,16 @@ export const routes = createBrowserRouter([
                 element: <About />
             },
             {
-                path: "/contact",
-                element: <Contact />
-            },
-            {
                 path: "/login",
                 element: <Login />
             },
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path: "/news-details/:id",
+                element: <NewsDetails />
             }
 
         ]

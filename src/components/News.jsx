@@ -16,12 +16,11 @@ const News = () => {
     useEffect(() => {
         fetchData()
     }, []);
-    console.log(newsData)
     return (
         <div className='space-y-5'>
             {
                 newsData.map((aNews) => {
-                    return <div className=" border bg-base-100 ">
+                    return <div key={aNews._id} className=" border bg-base-100 ">
                         <div className='mb-4 bg-gray-200 p-3 '>
                             <div className='flex justify-between items-center'>
                                 <div>
@@ -39,7 +38,7 @@ const News = () => {
                         <figure><img className='rounded-none' src={aNews.image_url} alt="news" /></figure>
                         <div className="p-2 mt-2">
 
-                            <p className='text-left text-gray-400'>{aNews.details.length < 200 ? aNews.length : aNews.details.slice(0, 200)}<Link className={` ${aNews.details.length < 200 && "hidden"} ml-2 text-blue-600 font-semibold`}>Read_More</Link></p>
+                            <p className='text-left text-gray-400'>{aNews.details.length < 200 ? aNews.length : aNews.details.slice(0, 200)}<Link to={`/news-details/${aNews._id}`} className={` ${aNews.details.length < 200 && "hidden"} ml-2 text-blue-600 font-semibold`} state={aNews}>Read_More</Link></p>
                         </div>
                         <div className='text-left mt-5 border-t p-4 flex justify-between items-center'>
                             <div className='flex items-center text-gray-400   gap-2'>
