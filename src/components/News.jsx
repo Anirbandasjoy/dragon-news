@@ -1,11 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useContext } from 'react';
 import { AiFillEye, AiFillStar, AiOutlineShareAlt, AiOutlineStar } from 'react-icons/ai';
 import { BsBookmark } from 'react-icons/bs';
 import Rating from 'react-rating';
 import { Link } from 'react-router-dom';
+import { authContext } from '../context/AuthProvider';
 
 const News = () => {
+    const { user } = useContext(authContext)
     const [newsData, setNewsData] = useState([]);
 
     const fetchData = async () => {

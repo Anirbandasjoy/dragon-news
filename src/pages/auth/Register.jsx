@@ -5,10 +5,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import * as yup from 'yup';
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
+import { useContext } from 'react';
+import { authContext } from '../../context/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(true);
     const [registerError, setRegisterError] = useState("");
+    const { registerUser } = useContext(authContext);
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -27,7 +31,21 @@ const Register = () => {
         onSubmit: (values, { resetForm }) => {
 
             const { email, password, name } = values;
-            console.log(email, password, name)
+            // user registation
+            registerUser(email, password)
+                .then((userCredential) => {
+                    console.log(userCredential.user);
+                    Swal.fire(
+                        'Thanks!',
+                        'Registation process successfully!',
+                        'success'
+                    )
+                })
+                .catch((err) => {
+                    setRegisterError(err.message)
+                    console.log(err.message)
+                })
+
         }
     });
 

@@ -7,6 +7,9 @@ import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import NewsDetails from "../components/NewsDetails";
 import NotFound from "../pages/notFound/NotFound";
+import Profile from "../pages/profile/Profile";
+import PrivetRoutes from "./PrivetRoutes";
+import Settings from "../pages/settings/Settings";
 
 
 export const routes = createBrowserRouter([
@@ -34,7 +37,15 @@ export const routes = createBrowserRouter([
             },
             {
                 path: "/news-details/:id",
-                element: <NewsDetails />
+                element: <PrivetRoutes><NewsDetails /></PrivetRoutes>
+            },
+            {
+                path: "/profile",
+                element: <PrivetRoutes><Profile /></PrivetRoutes>
+            },
+            {
+                path: "/settings",
+                element: <PrivetRoutes><Settings /></PrivetRoutes>
             }
 
         ]

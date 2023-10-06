@@ -7,6 +7,7 @@ import RightNavbar from './RightNavbar'
 import News from '../../components/News'
 
 const Home = () => {
+
     const { data } = useLoaderData();
 
     return (

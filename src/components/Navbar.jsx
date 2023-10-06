@@ -1,8 +1,27 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import profileImage from '../assets/user.png'
+import { useContext } from 'react'
+import { authContext } from '../context/AuthProvider'
+import Swal from 'sweetalert2'
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const { user, logOutUser } = useContext(authContext);
+
+    const handleLogOut = () => {
+        logOutUser()
+            .then(() => {
+                Swal.fire(
+                    '😒☑️😒',
+                    'log out successfully',
+                    'success'
+                )
+                navigate("/login")
+            })
+            .catch((err) => console.log(err.message))
+    }
+
     const navItems = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
@@ -33,21 +52,30 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end mr-2 mt-2 ">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-11  rounded-full">
-                            <img src={profileImage} />
+                            {
+                                user ? <img src={user?.photoURL} /> : <img src={profileImage} />
+                            }
                         </div>
                     </label>
-                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
-                    </ul>
+                    {
+                        user && <ul tabIndex={0} className="mt-3   z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52">
+                            {
+                                user && <>
+                                    <li>
+                                        <Link to="/profile" className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </Link>
+                                    </li>
+                                    <li><Link to="/settings">Settings</Link></li>
+                                </>
+                            }
+                        </ul>
+                    }
                 </div>
-                <Link to="/login" className="btn capitalize bg-gray-700 text-white sm:rounded-none w-14 rounded-md   sm:w-24  hover:bg-gray-700">Login</Link>
+                {
+                    user ? <Link onClick={handleLogOut} className="btn capitalize bg-gray-700 text-white sm:rounded-none w-14 rounded-md   sm:w-24  hover:bg-gray-700">Logout</Link> : <Link to="/login" className="btn capitalize bg-gray-700 text-white sm:rounded-none w-14 rounded-md   sm:w-24  hover:bg-gray-700">Login</Link>
+                }
             </div>
         </div>
     )
